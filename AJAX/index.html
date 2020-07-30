@@ -1,0 +1,147 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery | AJAx</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../icofont/icofont.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <header class="ajax-header">
+        <nav class="ajax-navbar">
+            <span class="menu">Let's Learn AJAX with jQuery</span>
+        </nav>
+    </header>
+    <p class="get">Get In touch with AJAX</p>
+
+    <section class="form-section">
+
+        <form action="https://jsonplaceholder.typicode.com/users" class="form">
+            <h2>Name:</h2>
+            <input id="name" class="inputs" type="text" placeholder="Name" onfocus="this.select()">
+            <h2>Email</h2>
+            <input id="email" class="inputs" type="text" placeholder="Email : xyz@exemple.com"><br><br>
+            <input class="submit" type="submit" value="Submit">
+        </form>
+
+
+
+
+    </section>
+    <button class="load">load the file</button>
+    <div id="result"></div>
+    <table id="users">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Birth date</th>
+        </tr>
+
+    </table>
+    <table id="covidma">
+        <tr>
+            <th>Région</th>
+            <th class="cases" data-column="cases" data-order="desc">cases &#9650</th>
+            <th>ljiiha</th>
+        </tr>
+
+    </table>
+    <script>
+        $(document).ready(function() {
+            $('.load').click(function() {
+                $('#result').load('load.html', function(responseTxt, statusTxt, xhr) {
+
+                    if (statusTxt == "success") {
+                        alert('document loaded successfuly')
+                    } else if (statusTxt == "error") {
+                        alert('Oops something went wrong pleaze try again' + xhr.statusText)
+                    }
+                })
+            })
+
+            /*
+            $.get('load.html', function(data) {
+                $('#result').html(data)
+            })
+            */
+            $.getJSON('users.json', function(data) {
+                $.each(data, function(i, user) {
+                    $('#users').append(`<tr>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.birthdate}</td>
+        </tr>`)
+                })
+            })
+
+            $.ajax({
+                method: 'GET',
+                url: 'https://services3.arcgis.com/hjUMsSJ87zgoicvl/arcgis/rest/services/Covid_19/FeatureServer/0/query?where=1%3D1&outFields=RegionFr,RegionAr,Cases,Nom_R%C3%A9gion_FR,Nom_R%C3%A9gion_AR,Recoveries&outSR=4326&f=json',
+                dataType: 'json'
+            }).done(function(data) {
+
+                $.each(data.features, function(i, regionInfo) {
+                    var region = regionInfo.attributes
+                    console.log(region)
+                    $('#covidma').append(`<tr>
+                                         <td>${region.RegionFr}</td>
+                                         <td>${region.Cases}</td>
+                                         <td>${region.RegionAr}</td>
+                                         </tr>`)
+
+                    /* $('.cases').on('click', function() {
+                     var order = $(this).data('order')
+                     var arrow = $(this).html()
+                     console.log(region.Cases)
+
+
+                     // console.log(order, arrow)
+
+                     arrow = arrow.substring(0, arrow.length - 1)
+                     if (order == 'desc') {
+                         $(this).data('order', "asc")
+                         $(this).html(arrow + '&#9660')
+                     } else {
+                         $(this).data('order', "desc")
+                         $(this).html(arrow + '&#9650')
+
+
+                     } Not working yet})*/
+
+                })
+            })
+
+            $('.form').submit(function(e) {
+                e.preventDefault();
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var url = $(this).attr('action');
+                console.log(name, url, email)
+
+                $.post(url, {
+                    Name: name,
+                    Email: email
+                }).done(function(data) {
+                    console.log(data)
+                })
+
+
+            })
+
+
+
+
+
+
+
+        })
+    </script>
+
+
+</body>
+
+</html>

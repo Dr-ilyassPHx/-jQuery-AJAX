@@ -1,0 +1,236 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./icofont/icofont.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <div id="page-banner">
+                <h1 class="title ">Bookorama</h1>
+                <p>Books for jQuery</p>
+                <form id="search-books">
+                    <input type="text" placeholder="Search books... " />
+
+                </form>
+            </div>
+        </header>
+        <button class="scroll"><img width='50px'
+                src="data:image/png;base64,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"
+                alt="scroll down"></button>
+        <div id="book-list">
+            <h2 class="title ">Books to Read</h2>
+            <ul>
+                <li class="book-hover">
+                    <span class="name">Name of the Wind</span>
+                    <span id="bk1" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Wise Man's Fear</span>
+                    <span id="bk2" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Wise Man's Fear</span>
+                    <span id="bk3" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Lord of the Rings: The Fellowship of the Ring</span>
+                    <span id="bk4" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Lord of the Rings: The Two Towers</span>
+                    <span id="bk5" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Lord of the Rings: The Return of the Kings</span>
+                    <span id="bk6" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">Harry Potter and the Cursed Child
+</span>
+                    <span id="bk7" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Wise Man's Fear</span>
+                    <span id="bk8" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">Harry Potter and the Prisoner of Azkaban
+</span>
+                    <span id="bk9" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Wise Man's Fear</span>
+                    <span id="bk10" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+
+                <li class="book-hover">
+                    <span class="name">Kafka on the Shore</span>
+                    <span id="bk11" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+                <li class="book-hover">
+                    <span class="name">The Master and the Margarita</span>
+                    <span id="bk12" class="delete">download <i class="icofont-download"></i></span>
+                </li>
+
+            </ul>
+        </div>
+        <form id="add-book">
+            <input type="text" placeholder="Add a book... " required />
+            <button>Add</button>
+        </form>
+
+
+
+    </div>
+
+
+
+    <script>
+        $(function() { //  or   $(document).ready(function()
+            // $('#wrapper').hide(600).show(1000).slideUp(1000).delay(200).slideDown(1000).fadeOut(500).fadeIn(600)
+            $('.delete').css({
+                backgroundColor: '#e74c3c'
+            })
+            $('#page-banner').css({
+                backgroundColor: '#2c3e50',
+                color: 'white'
+            })
+            $('.delete').css({
+                backgroundColor: '#34495e'
+            })
+
+            // $('.delete').html('<h1>hello</h1>')y
+
+            /**************************
+             Listening to Event
+             **************************/
+            $('#add-book button').on('click', function(e) {
+
+                    if ($('#add-book input').val() != '') {
+                        var liNumber = ($('#book-list ul li').length + 1)
+                        console.log(liNumber)
+                        var ts = $('#add-book input').val()
+                        $('#book-list ul').prepend('<li class="book-hover"><span class="name">' + ts + '</span> <span id="bk' + liNumber + '" class="delete"> download <i class="icofont-download"></i></span></li>')
+                        e.preventDefault()
+                            // $('h1').appendTo('#book-list ul')
+                            // var code = e.which
+                            // console.log(code)
+
+
+
+                    }
+                })
+                /*
+            myArray = ['Madara', 'shanks', 'chrollo', 'shunsui', 'minato']
+            $.each(myArray, function(i, val) {
+                console.log(val)
+                $('#book-list').append('<ul><li>' + val + '</li></ul>')
+            })
+            */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            $('#page-banner').on('mouseover', function() {
+                var solor = 'b33939'
+                $(this).css({
+                        backgroundColor: solor
+                    })
+                    // $(this).slideToggle()
+                    // $(this).fadeToggle(200)
+            })
+            $('.book-hover').on('click', function() {
+
+                $(this).animate({
+                    left: 50,
+
+
+                })
+                console.log('an')
+
+
+            })
+            $('.book-hover').on('mouseover', function(event) {
+                var b = $(this).children('span')[1].id
+
+                $(this).animate({
+                    left: 50,
+                    // top: 30,
+
+                })
+                c = $('#' + b).show()
+
+
+            })
+
+
+            $('.book-hover').on('mouseout', function(event) {
+                var b = $(this).children('span')[1].id
+
+                $(this).animate({
+                    left: 0
+
+                })
+                c = $('#' + b).hide()
+
+                // console.log(c)
+            })
+
+            $('.delete').on('click', function() {
+                $(this).parent().fadeOut(2000, function() {
+                    $('h2').text('downloaded successfully')
+                })
+            })
+
+            $('.scroll').on('click', function() {
+                console.log('cicked')
+                $('html, body').animate({
+                    scrollTop: 1000
+                }, '50')
+            })
+
+
+
+
+
+            // search in the console :     $('div[id = page-banner]') ====>
+
+
+
+
+
+
+
+
+
+
+        });
+    </script>
+
+</body>
+
+</html>
